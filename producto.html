@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Caps — Producto</title>
+</head>
+<body>
+
+<section class="caps-product">
+  <a class="floating-cart" href="#" aria-label="Carrito">🛒<span class="cart-count">1</span></a>
+
+  <div class="product-layout">
+    <div class="product-gallery">
+      <div class="gallery-main">
+        <img id="MainImg" src="" alt="Producto">
+      </div>
+    </div>
+
+    <div class="product-info">
+      <p class="small-title">Studio Caps</p>
+      <h1 id="prod-nombre">Cargando...</h1>
+      <p id="prod-precio" class="product-price">$0.00</p>
+
+      <div class="product-block product-description">
+        <h3>Descripción</h3>
+        <p id="prod-desc">Cargando descripción...</p>
+      </div>
+
+      <button type="button" class="button button-dark">🛒 AÑADIR AL CARRITO</button>
+    </div>
+  </div>
+</section>
+
+<script>
+    // 1. Base de datos de tus gorras
+    const catalogo = {
+        "negra": {
+            nombre: "Gorra Classic Negra",
+            precio: "$25.00",
+            img: "https://images.unsplash.com/photo-1521369909029-2afed882baee?w=1200",
+            desc: "Gorra clásica de corte estructurado, color negro intenso."
+        },
+        "blanca": {
+            nombre: "Gorra Classic Blanca",
+            precio: "$25.00",
+            img: "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=1200",
+            desc: "Gorra minimalista en color blanco, perfecta para el verano."
+        }
+    };
+
+    // 2. Detectar qué gorra abrir
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const prod = catalogo[id] || catalogo["negra"]; // Por defecto muestra la negra
+
+    // 3. Rellenar la página automáticamente
+    document.getElementById('prod-nombre').innerText = prod.nombre;
+    document.getElementById('prod-precio').innerText = prod.precio;
+    document.getElementById('prod-desc').innerText = prod.desc;
+    document.getElementById('MainImg').src = prod.img;
+</script>
+
+<style>
+    /* Estilos base (los mismos que tenías) */
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4efe6; }
+    .caps-product { padding: 60px 5%; }
+    .product-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; }
+    .gallery-main { aspect-ratio: 1/1; background: #e9e1d5; }
+    .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+    .floating-cart { position: fixed; top: 18px; right: 18px; width: 50px; height: 50px; background: #111; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none; }
+    .product-price { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+    .button-dark { background: #111; color: #fff; border: none; padding: 15px; width: 100%; cursor: pointer; text-transform: uppercase; }
+    @media (max-width: 800px) { .product-layout { grid-template-columns: 1fr; } }
+</style>
+
+</body>
+</html>
